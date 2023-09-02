@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                                           color: AppColors.deepGrey,
                                           child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               //taskCompleted
                                               BlocProvider.of<TaskCubit>(
