@@ -244,6 +244,7 @@ class TaskComponent extends StatelessWidget {
                 //title
                 Text(
                   taskModel.title,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 SizedBox(height: 8.h),
