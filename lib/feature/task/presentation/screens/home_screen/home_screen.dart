@@ -22,20 +22,21 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: BlocConsumer<TaskCubit, TaskState>(
-            listener: (context, state) {
-              if (state is UpdateTaskSucessState) {
-                showToast(
-                    message: 'Completed Successfully',
-                    state: ToastStates.success);
-                Navigator.pop(context);
-              } else if (state is DeleteTaskSucessState) {
-                showToast(
-                    message: 'Deleted Successfully',
-                    state: ToastStates.success);
-                Navigator.pop(context);
-              }
-            },
+          child: BlocBuilder<TaskCubit, TaskState>(
+            // listener: (context, state) {
+            //   if (state is UpdateTaskSucessState) {
+            //     showToast(
+            //         message: 'Completed Successfully',
+            //         state: ToastStates.success);
+            //     Navigator.pop(context);
+            //   }
+            //   if (state is DeleteTaskSucessState) {
+            //     showToast(
+            //         message: 'Deleted Successfully',
+            //         state: ToastStates.success);
+            //     Navigator.pop(context);
+            //   }
+            // },
             builder: (context, state) {
               final cubit = TaskCubit.get(context);
               return Column(

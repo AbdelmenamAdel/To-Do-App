@@ -45,7 +45,6 @@ class AddTaskScreen extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              final cubit = TaskCubit.get(context);
               return Form(
                 key: BlocProvider.of<TaskCubit>(context).formKey,
                 child: Column(
@@ -53,7 +52,7 @@ class AddTaskScreen extends StatelessWidget {
                   children: [
                     //! Title
                     CustomTextField(
-                      controller: cubit.titleController,
+                      controller: TaskCubit.get(context).titleController,
                       title: AppStrings.tilte,
                       hintText: AppStrings.tilteHint,
                       validator: (val) {
@@ -66,7 +65,7 @@ class AddTaskScreen extends StatelessWidget {
                     SizedBox(height: 24.h),
                     //! Note
                     CustomTextField(
-                      controller: cubit.noteController,
+                      controller: TaskCubit.get(context).noteController,
                       title: AppStrings.note,
                       hintText: AppStrings.notehint,
                       validator: (val) {
@@ -80,10 +79,11 @@ class AddTaskScreen extends StatelessWidget {
                     //! Date
                     CustomTextField(
                       title: AppStrings.date,
-                      hintText: DateFormat.yMMMd().format(cubit.currentDate),
+                      hintText: DateFormat.yMMMd()
+                          .format(TaskCubit.get(context).currentDate),
                       suffix: Icons.calendar_month_rounded,
                       onPressed: () async {
-                        cubit.getDate(context);
+                        TaskCubit.get(context).getDate(context);
                       },
                       readOnly: true,
                     ),
@@ -97,10 +97,10 @@ class AddTaskScreen extends StatelessWidget {
                             child: CustomTextField(
                               readOnly: true,
                               title: AppStrings.startTime,
-                              hintText: cubit.startTime,
+                              hintText: TaskCubit.get(context).startTime,
                               suffix: Icons.timer_outlined,
                               onPressed: () async {
-                                cubit.getStartTime(context);
+                                TaskCubit.get(context).getStartTime(context);
                               },
                             ),
                           ),
@@ -113,10 +113,10 @@ class AddTaskScreen extends StatelessWidget {
                             child: CustomTextField(
                               readOnly: true,
                               title: AppStrings.endTime,
-                              hintText: cubit.endTime,
+                              hintText: TaskCubit.get(context).endTime,
                               suffix: Icons.timer_outlined,
                               onPressed: () async {
-                                cubit.getEndTime(context);
+                                TaskCubit.get(context).getEndTime(context);
                               },
                             ),
                           ),
@@ -146,11 +146,14 @@ class AddTaskScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    cubit.changeCheckMarkIndex(index);
+                                    TaskCubit.get(context)
+                                        .changeCheckMarkIndex(index);
                                   },
                                   child: CircleAvatar(
-                                    backgroundColor: cubit.getColor(index),
-                                    child: index == cubit.currentIndex
+                                    backgroundColor:
+                                        TaskCubit.get(context).getColor(index),
+                                    child: index ==
+                                            TaskCubit.get(context).currentIndex
                                         ? Icon(
                                             Icons.check,
                                             color: AppColors.white,
@@ -177,8 +180,11 @@ class AddTaskScreen extends StatelessWidget {
                             width: double.infinity,
                             text: AppStrings.createTask,
                             onPressed: () {
-                              if (cubit.formKey.currentState!.validate()) {
-                                cubit.insertTask();
+                              if (TaskCubit.get(context)
+                                  .formKey
+                                  .currentState!
+                                  .validate()) {
+                                TaskCubit.get(context).insertTask();
                               }
                             },
                           )
