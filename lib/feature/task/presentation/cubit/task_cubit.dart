@@ -194,7 +194,7 @@ class TaskCubit extends Cubit<TaskState> {
 
   //! Get App Theme
   void getTheme() async {
-    //  isDark = await sl<CacheHelper>().getData(key: 'isDark');
+    isDark = await sl<CacheHelper>().getData(key: 'isDark');
     emit(GetThemeState());
   }
 }

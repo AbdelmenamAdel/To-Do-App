@@ -12,11 +12,11 @@ class SqfliteHelper {
   //! Initialization Database
   void intiDB() async {
     //*step 1 => Create database
-    print('Database created successfully');
     await openDatabase(
       'tasks.db',
       version: 1,
       onCreate: (Database db, int v) async {
+        print('Database created successfully');
         //*step 2 => create table
         return await db.execute('''
       CREATE TABLE Tasks (
